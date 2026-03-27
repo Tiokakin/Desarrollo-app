@@ -3,13 +3,13 @@
 
 const APP_VERSIONS = {
     // Al estar en etapa previa a 1.0, usamos nomenclaturas tipo 0.x.x
-    central: "v0.9.5",
-    fichaclinica: "v0.8.2",
-    odontograma: "v0.7.5",
-    periodontograma: "v0.8.0",
-    mapa: "v0.6.1",
-    reporte: "v0.5.0",
-    periodontograma_legacy: "v0.1.0"
+    central: "v0.01",
+    fichaclinica: "v0.01",
+    odontograma: "v0.01",
+    periodontograma: "v0.01",
+    mapa: "v0.01",
+    reporte: "v0.01",
+    periodontograma_legacy: "v0.01"
 };
 
 document.addEventListener("DOMContentLoaded", () => {
