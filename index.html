@@ -41,31 +41,45 @@
 
     <main class="container mx-auto px-6 py-8">
         <div class="glass rounded-3xl p-8 mb-12 shadow-xl shadow-blue-900/5 border border-white">
-            <div class="flex flex-col md:flex-row gap-6 items-end">
-                <div class="flex-1 w-full">
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1">Profesional Evaluador</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-user-md absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                        <input type="text" id="operador" placeholder="Nombre del Dr/Dra" oninput="guardarSilencioso()"
-                            class="w-full pl-11 pr-4 py-3 rounded-2xl bg-white/50 border border-slate-200 focus:border-blue-500 outline-none transition text-sm">
-                    </div>
-                </div>
-
-                <div class="flex-[1.5] w-full flex flex-col justify-end">
-                    <button type="button" onclick="document.getElementById('caja-paciente').classList.toggle('hidden')"
-                        class="w-full flex justify-between items-center px-6 py-3 bg-slate-900 text-white rounded-2xl font-bold transition hover:bg-slate-800 shadow-md">
-                        <span><i class="fa-solid fa-users mr-2 text-blue-400"></i>Gestión de Pacientes</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+                
+                <!-- 1. TAB PROFESIONAL EVALUADOR -->
+                <div class="w-full">
+                    <button type="button" onclick="document.getElementById('caja-profesional').classList.toggle('hidden'); document.getElementById('caja-paciente').classList.add('hidden');"
+                        class="w-full flex justify-between items-center px-6 py-4 bg-slate-900 mi-dark-bg-slate-800 text-white rounded-2xl font-bold transition hover:bg-slate-800 shadow-md">
+                        <span class="flex items-center"><i class="fa-solid fa-user-doctor mr-3 text-teal-400 text-lg"></i>Profesional Evaluador</span>
                         <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
                     </button>
                     
-                    <div id="caja-paciente" class="hidden mt-4 p-5 bg-white border border-slate-200 rounded-2xl shadow-inner transition-all duration-300 relative overflow-hidden z-10">
-                        <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+                    <!-- Caja Profesional -->
+                    <div id="caja-profesional" class="hidden absolute left-0 md:w-[calc(50%-12px)] w-full mt-3 p-6 bg-white mi-dark-bg-slate-800 border border-slate-200 mi-dark-border-slate-700 rounded-2xl shadow-2xl transition-all duration-300 z-30 overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1.5 h-full bg-teal-500"></div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3 ml-2">Datos del Evaluador</label>
+                        <div class="relative ml-1">
+                            <i class="fa-solid fa-user-md absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input type="text" id="operador" placeholder="Nombre completo del Dr/Dra" oninput="guardarSilencioso()"
+                                class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 mi-dark-bg-slate-900 border border-slate-200 mi-dark-border-slate-700 focus:bg-white focus:border-teal-500 outline-none transition text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. TAB GESTIÓN DE PACIENTES -->
+                <div class="w-full">
+                    <button type="button" onclick="document.getElementById('caja-paciente').classList.toggle('hidden'); document.getElementById('caja-profesional').classList.add('hidden');"
+                        class="w-full flex justify-between items-center px-6 py-4 bg-slate-900 mi-dark-bg-slate-800 text-white rounded-2xl font-bold transition hover:bg-slate-800 shadow-md">
+                        <span class="flex items-center"><i class="fa-solid fa-users mr-3 text-blue-400 text-lg"></i>Gestión de Pacientes</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-slate-400"></i>
+                    </button>
+                    
+                    <!-- Caja Paciente -->
+                    <div id="caja-paciente" class="hidden absolute right-0 md:w-[calc(50%-12px)] w-full mt-3 p-6 bg-white mi-dark-bg-slate-800 border border-slate-200 mi-dark-border-slate-700 rounded-2xl shadow-2xl transition-all duration-300 z-30 overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1.5 h-full bg-blue-500"></div>
                         
                         <!-- Panel de Selección/Carga Guardados -->
-                        <div class="mb-4 pb-4 border-b border-slate-100">
+                        <div class="mb-5 pb-5 border-b border-slate-100 mi-dark-border-slate-700">
                             <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 ml-2">Pacientes Guardados</label>
-                            <div class="flex gap-2">
-                                <select id="select-paciente-guardado" class="flex-1 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 outline-none text-sm text-slate-600 focus:border-blue-500">
+                            <div class="flex gap-2 ml-1">
+                                <select id="select-paciente-guardado" class="flex-1 px-3 py-2 rounded-xl bg-slate-50 mi-dark-bg-slate-900 border border-slate-200 mi-dark-border-slate-700 outline-none text-sm text-slate-600 mi-dark-text-slate-200 focus:border-blue-500">
                                     <option value="">-- Seleccionar Paciente Guardado --</option>
                                 </select>
                                 <button onclick="cargarPacienteSeleccionado()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl font-bold text-sm transition-colors shadow shadow-blue-200 cursor-pointer">
@@ -78,10 +92,10 @@
                         <div class="flex justify-between items-end mb-3 ml-2">
                             <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Sesión Activa</label>
                             <div class="flex gap-2">
-                                <button id="btn-guardar-paciente" onclick="guardarPacienteActual()" class="text-[10px] bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer">
+                                <button id="btn-guardar-paciente" onclick="guardarPacienteActual()" class="text-[10px] bg-slate-100 mi-dark-bg-slate-700 hover:bg-slate-200 mi-dark-hover:bg-slate-600 text-slate-600 mi-dark-text-slate-200 font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer">
                                     <i class="fa-solid fa-floppy-disk mr-1"></i> Guardar
                                 </button>
-                                <button onclick="iniciarNuevoPaciente()" class="text-[10px] bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer">
+                                <button onclick="iniciarNuevoPaciente()" class="text-[10px] bg-amber-50 mi-dark-bg-amber-900/30 hover:bg-amber-100 text-amber-700 mi-dark-text-amber-400 font-bold px-3 py-1.5 rounded-lg transition-colors cursor-pointer">
                                     <i class="fa-solid fa-eraser mr-1"></i> Limpiar Activo
                                 </button>
                             </div>
@@ -90,12 +104,12 @@
                             <div class="relative flex-[2]">
                                 <i class="fa-solid fa-id-card absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                                 <input type="text" id="paciente-id" placeholder="Nombre completo" oninput="guardarSilencioso()"
-                                    class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 outline-none transition text-sm">
+                                    class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 mi-dark-bg-slate-900 border border-slate-200 mi-dark-border-slate-700 focus:bg-white focus:border-blue-500 outline-none transition text-sm">
                             </div>
                             <div class="relative flex-1">
                                 <i class="fa-solid fa-address-card absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
                                 <input type="text" id="paciente-rut" placeholder="RUT" oninput="guardarSilencioso()"
-                                    class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-blue-500 outline-none transition text-sm">
+                                    class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 mi-dark-bg-slate-900 border border-slate-200 mi-dark-border-slate-700 focus:bg-white focus:border-blue-500 outline-none transition text-sm">
                             </div>
                         </div>
                     </div>

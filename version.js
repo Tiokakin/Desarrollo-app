@@ -55,6 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelectorAll('.session-paciente-display').forEach(el => {
                 el.textContent = sesion.paciente ? sesion.paciente : 'No especificado';
             });
+            document.querySelectorAll('.session-rut-display').forEach(el => {
+                el.textContent = sesion.rut ? sesion.rut : '---';
+            });
         }
     } catch(e) {
         console.error("No se pudo cargar la sesión para el banner unificado.", e);
