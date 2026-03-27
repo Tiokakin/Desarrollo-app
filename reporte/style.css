@@ -1,0 +1,33 @@
+@media print {
+    @page {
+        margin: 15mm;
+        size: A4;
+    }
+    
+    body {
+        background-color: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    /* Utilidades nativas de impresión para evitar cortes extraños en páginas */
+    .break-inside-avoid {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    h2 {
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+    
+    /* Sobrescritura de colores para asegurar legibilidad en blanco y negro o color de imprenta */
+    .print\:border-none {
+        border: none !important;
+    }
+    
+    /* Fuerzo la opacidad a full para los iconos en imprenta */
+    i.fa-solid {
+        color: #1e293b !important;
+    }
+}

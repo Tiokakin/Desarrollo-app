@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Previsualización Periodontograma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: Arial, sans-serif; background: #e2e8f0; }
+        .grid-container { display: flex; flex-direction: column; width: 1050px; margin: 20px auto; background: white; padding: 20px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        .row-header { background: #4c1d95; color: white; font-weight: bold; text-align: center; padding: 4px; font-size: 14px; text-transform: uppercase; }
+        .tooth-row { display: grid; grid-template-columns: 120px repeat(16, 1fr); text-align: center; border-bottom: 1px solid #e2e8f0; }
+        .tooth-row.data-row { font-size: 11px; }
+        .tooth-col { border-right: 1px solid #e2e8f0; padding: 2px 0; display: flex; align-items: center; justify-content: center; }
+        .tooth-col:last-child { border-right: none; }
+        .header-col { font-weight: bold; background: #f8fafc; border-right: 2px solid #cbd5e1; text-align: right; padding-right: 8px; }
+        .values-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; width: 100%; text-align: center; }
+        
+        .svg-container { position: relative; width: 928px; height: 160px; margin-left: 120px; border-left: 2px solid #cbd5e1; border-bottom: 1px solid #e2e8f0; background: #f8fafc; overflow: hidden; }
+        .svg-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        
+        /* Grid de milímetros en SVG de fondo */
+        .mm-line { stroke: #cbd5e1; stroke-width: 0.5; }
+        .cej-line { stroke: #16a34a; stroke-width: 1.5; stroke-dasharray: 4; } /* Linea Verde para UCE baseline */
+        
+        .tooth-path { fill: #ffffff; stroke: #64748b; stroke-width: 1.5; }
+        .mg-line { fill: none; stroke: #2563eb; stroke-width: 2.5; stroke-linejoin: round; } /* Azul: Margen Gingival */
+        .ps-line { fill: none; stroke: #dc2626; stroke-width: 2.5; stroke-linejoin: round; } /* Rojo: Fondo de Bolsa */
+        
+        @media print {
+            body { background: white; }
+            .grid-container { width: 100%; margin: 0; padding: 0; box-shadow: none; }
+            .print-hide { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed top-4 left-4 print-hide flex items-center gap-2 z-50 text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-white/80 backdrop-blur-sm px-3 py-2 rounded-lg shadow-sm border border-slate-200">
+        PerioMap <span class="app-version-display ml-1 text-blue-500" data-app="mapa"></span>
+    </div>
+
+    <div class="fixed top-4 right-4 print-hide flex gap-4 z-50">
+        <button onclick="window.close()" class="px-6 py-2 bg-white border border-slate-300 rounded shadow hover:bg-slate-50 font-bold text-slate-700">Cerrar</button>
+        <button onclick="window.print()" class="px-6 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 font-bold"><i class="fas fa-print mr-2"></i> Imprimir PerioMap</button>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL INYECTADO POR JS -->
+    <div id="app" class="pb-20"></div>
+
+    <script src="../version.js"></script>
+    <script src="mapa.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OdontoVoice Pro | Suite Dental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-50 min-h-screen font-sans text-slate-900">
+
+    <nav class="bg-white border-b border-slate-200 py-4 px-8 no-print sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto flex justify-between items-center flex-wrap gap-4">
+            <div class="flex items-center gap-4">
+                <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-indigo-600 transition group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:-translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-sm font-medium">Volver al Portal</span>
+                </a>
+                <span class="h-6 w-px bg-slate-200 hidden md:block"></span>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 shadow-sm font-bold">
+                        <i class="fa-solid fa-tooth"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-slate-800 tracking-tight leading-none">OdontoVoice</h1>
+                        <p class="text-[10px] text-indigo-600 font-bold uppercase tracking-widest mt-1">Módulo de Mapeo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banner Unificado -->
+            <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 shadow-sm">
+                    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-black shadow-inner">
+                        <i class="fa-solid fa-user-doctor text-sm"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Profesional</span>
+                        <span class="session-operador-display text-xs font-bold text-slate-700 leading-none">Cargando...</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-full border border-slate-200 shadow-sm">
+                    <div class="text-right">
+                        <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Paciente</span>
+                        <span class="session-paciente-display text-xs font-bold text-slate-700 leading-none">Cargando...</span>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-black shadow-inner">
+                        <i class="fa-solid fa-user text-sm"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8 space-y-6">
+        <div class="flex justify-center mb-6">
+            <button id="btn-voz" class="w-full max-w-md bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 text-center flex justify-center items-center gap-2">
+                <i class="fas fa-microphone"></i> <span id="estado-mic">Iniciar Mapeo Especializado</span>
+            </button>
+            <div id="status" class="hidden"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- ODONTOGRAMA CENTRAL -->
+            <div class="lg:col-span-3 space-y-6">
+                <!-- Arcada Superior -->
+                <div class="bg-white p-6 rounded-2xl border shadow-sm flex flex-col items-center">
+                    <h3 class="text-sm font-bold text-slate-800 mb-6 border-b pb-2 w-full text-center uppercase tracking-widest">Arcada Superior (Maxilar)</h3>
+                    <!-- Los dientes superiores se inyectan acá en orden 18..11, 21..28 -->
+                    <div id="arcada-superior" class="flex flex-wrap justify-center gap-2 md:gap-3 w-full"></div>
+                </div>
+                
+                <!-- Arcada Inferior -->
+                <div class="bg-white p-6 rounded-2xl border shadow-sm flex flex-col items-center">
+                    <h3 class="text-sm font-bold text-slate-800 mb-6 border-b pb-2 w-full text-center uppercase tracking-widest">Arcada Inferior (Mandíbula)</h3>
+                    <!-- Los dientes inferiores se inyectan acá en orden 48..41, 31..38 -->
+                    <div id="arcada-inferior" class="flex flex-wrap justify-center gap-2 md:gap-3 w-full"></div>
+                </div>
+
+                <!-- Log (Transcripción) -->
+                <div class="bg-white p-5 rounded-2xl border shadow-sm">
+                    <h3 class="text-sm font-bold text-slate-800 mb-2"><i class="fa-solid fa-list-check text-indigo-400 mr-2"></i>Historial Clínico de Hallazgos</h3>
+                    <div id="log-dictado" class="text-xs text-emerald-400 bg-slate-900 p-4 rounded-xl font-mono h-32 overflow-y-auto shadow-inner flex flex-col-reverse gap-1">
+                        <div class="text-slate-500">>> Sistema OdontoVoice listo. Detectando patologías...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRACKER LATERAL -->
+            <div class="lg:col-span-1">
+                <div class="bg-white p-5 rounded-2xl border shadow-sm sticky top-24">
+                    <div class="flex justify-between items-end border-b pb-3 mb-4">
+                        <h3 class="text-sm font-bold text-slate-800 leading-none"><i class="fa-solid fa-teeth text-indigo-400 mr-2"></i>Evaluadas</h3>
+                        <span id="piezas-count" class="text-indigo-600 font-black leading-none">0/32</span>
+                    </div>
+                    
+                    <button id="btn-reiniciar" class="w-full mb-4 bg-white border border-red-200 text-red-500 hover:bg-red-50 hover:text-red-700 font-bold py-2 rounded-lg text-[10px] uppercase tracking-widest transition-colors flex justify-center items-center gap-2">
+                        <i class="fas fa-trash-can"></i> Reiniciar Odontograma
+                    </button>
+
+                    <div id="tracker-piezas" class="grid grid-cols-4 gap-2 text-center text-[10px] font-bold">
+                    </div>
+
+                    <!-- LEYENDA CLÍNICA -->
+                    <div class="mt-8 border-t border-slate-100 pt-5">
+                        <h4 class="text-xs font-bold text-slate-800 mb-3 uppercase tracking-widest flex items-center"><i class="fa-solid fa-palette text-indigo-400 mr-2"></i>Leyenda Clínica</h4>
+                        <div class="space-y-2 text-[10px] font-medium text-slate-600">
+                            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-[#f8fafc] border border-slate-300"></div>Sano / Limpio</div>
+                            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-[#ef4444]"></div>Caries / Cavidad</div>
+                            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-[#3b82f6]"></div>Restauración / Resina</div>
+                            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-[#a855f7]"></div>Restauración Defectuosa</div>
+                            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-[#0f172a]"></div>Estado Radicular</div>
+                            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-[#eab308]"></div>Abfracción / Abrasión</div>
+                            <div class="flex items-center gap-2 pt-1"><div class="w-3 h-3 rounded-sm bg-slate-100 border border-slate-200 flex items-center justify-center text-[8px] text-slate-400 line-through">18</div>Ausente / Extraída</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="p-6 text-center text-slate-400 text-[10px] uppercase mt-12 mb-4 border-t border-slate-200">
+        Portal Suite Dental | OdontoVoice Pro Módulo Clínico Avanzado - <span class="app-version-display font-bold text-indigo-500" data-app="odontograma"></span>
+    </footer>
+
+    <script src="../version.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
