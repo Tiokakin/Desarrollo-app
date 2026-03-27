@@ -65,7 +65,7 @@ function generarReporteConsolidado() {
         <html>
         <head>
             <title>Informe - ${sesion.paciente}</title>
-            <script>tailwind.config = { darkMode: 'class' };</script>
+            <script>tailwind = { config: { darkMode: 'class' } };</script>
             <script src="https://cdn.tailwindcss.com"></script>
             <style>
                 @media print { .no-print { display: none; } }

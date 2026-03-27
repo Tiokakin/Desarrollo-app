@@ -5,25 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dental Suite Pro</title>
     
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: { extend: {} }
-        }
+        };
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 min-h-screen font-sans text-slate-800 dark:text-slate-100 transition-colors duration-300">
+<body class="bg-slate-50 mi-dark-bg-slate-900 min-h-screen font-sans text-slate-800 mi-dark-text-slate-100 transition-colors duration-300">
 
     <nav class="p-6">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-blue-600 p-2 rounded-lg shadow-lg shadow-blue-200">
-                    <i class="fa-solid fa-tooth text-white text-xl"></i>
-                </div>
+                <img src="./assets/img/icono.png" alt="Logo Dental Suite" class="h-10 w-auto object-contain mi-dark-logo drop-shadow-sm">
                 <div>
                     <h1 class="text-xl font-black tracking-tight text-slate-900 uppercase">Dental<span class="text-blue-600">Suite</span></h1>
                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Innovation Lab</p>
@@ -31,12 +29,12 @@
             </div>
             
             <!-- Modo Oscuro Toggle -->
-            <div class="flex items-center gap-2 bg-white dark:bg-slate-800 px-3 py-1.5 rounded-full shadow-sm border border-slate-200 dark:border-slate-700">
-                <i class="fa-solid fa-sun text-slate-400 dark:text-amber-400 text-xs"></i>
-                <button id="theme-slider" class="relative w-10 h-5 bg-slate-200 dark:bg-slate-600 rounded-full cursor-pointer transition-colors duration-300 outline-none" onclick="toggleThemeGlobal()">
+            <div class="flex items-center gap-2 bg-white mi-dark-bg-slate-800 px-3 py-1.5 rounded-full shadow-sm border border-slate-200 mi-dark-border-slate-700">
+                <i class="fa-solid fa-sun text-slate-400 mi-dark-text-amber-400 text-xs"></i>
+                <button id="theme-slider" class="relative w-10 h-5 bg-slate-200 mi-dark-bg-slate-600 rounded-full cursor-pointer transition-colors duration-300 outline-none" onclick="toggleThemeGlobal()">
                     <div id="theme-knob" class="absolute w-4 h-4 bg-white rounded-full transition-transform duration-300 left-0.5 top-0.5 shadow-sm"></div>
                 </button>
-                <i class="fa-solid fa-moon text-slate-400 dark:text-blue-300 text-xs"></i>
+                <i class="fa-solid fa-moon text-slate-400 mi-dark-text-blue-300 text-xs"></i>
             </div>
         </div>
     </nav>
