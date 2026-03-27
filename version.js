@@ -12,6 +12,25 @@ const APP_VERSIONS = {
     periodontograma_legacy: "v0.01"
 };
 
+// Exponer la función de Toggle a nivel global desde el inicio
+window.toggleThemeGlobal = () => {
+    try {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('OdontoTheme', isDark ? 'dark' : 'light');
+        
+        const sliderKnob = document.getElementById('theme-knob');
+        if (sliderKnob) {
+            if (isDark) {
+                sliderKnob.classList.add('translate-x-5');
+            } else {
+                sliderKnob.classList.remove('translate-x-5');
+            }
+        }
+    } catch (e) {
+        console.error("Error al alternar tema oscuro:", e);
+    }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     // Actualizar elementos dinámicamente según su atributo data-app
     const versionElements = document.querySelectorAll('.app-version-display, #version-label');
@@ -80,15 +99,20 @@ document.addEventListener("DOMContentLoaded", () => {
             { selector: 'select, textarea', add: 'dark:bg-slate-800 dark:text-white dark:border-slate-700' },
             { selector: 'input[type="text"], input[type="number"]', add: 'dark:bg-slate-800 dark:text-white dark:border-slate-700' },
 
-            // Body
+            // Body y Componentes especialez
             { selector: 'body', add: 'dark:bg-slate-900 dark:text-slate-100' },
+            { selector: '.glass', add: 'dark:bg-slate-800/80 dark:border-slate-700' },
         ];
 
         mappings.forEach(m => {
-            document.querySelectorAll(m.selector).forEach(el => {
-                const classes = m.add.split(' ');
-                el.classList.add(...classes);
-            });
+            try {
+                document.querySelectorAll(m.selector).forEach(el => {
+                    const classes = m.add.trim().split(/\s+/);
+                    el.classList.add(...classes);
+                });
+            } catch (err) {
+                console.error(`Error aplicando tema oscuro al selector: ${m.selector}`, err);
+            }
         });
     };
 
@@ -106,16 +130,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Aplicar estado inicial guardado
+    // Aplicar estado inicial guardado globalmente y deslizar switch si aplica
     if (localStorage.getItem('OdontoTheme') === 'dark') {
         document.documentElement.classList.add('dark');
+        const sliderKnob = document.getElementById('theme-knob');
+        if (sliderKnob) sliderKnob.classList.add('translate-x-5');
     }
-    syncThemeSlider();
-
-    // Exponer la función de Toggle a nivel global para que el botón en index.html pueda llamarla
-    window.toggleThemeGlobal = () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('OdontoTheme', isDark ? 'dark' : 'light');
-        syncThemeSlider();
-    };
 });
