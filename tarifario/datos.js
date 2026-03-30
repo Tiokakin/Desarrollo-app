@@ -1,6 +1,6 @@
 // ============================================================
 //  TARIFARIO DE IMPLANTES - Archivo de Precios Base
-//  Datos version 1.1 — Actualizar directamente en este archivo
+//  Datos version 1.2 — Actualizado 30/03/2026
 //
 //  INSTRUCCIONES:
 //  - Edita los valores de "precio" según tus listas de precios
@@ -9,65 +9,70 @@
 //  - Ejemplo incorrecto: precio: "$350.000"
 //  - Para agregar un ítem nuevo, copia una línea y cámbiala
 //  - Para dejarlo en blanco (sin precio definido), usa: precio: 0
+//
+//  FUENTES:
+//  - Neobiotech: Precio Universidad
+//  - Neodent: Precio Instituto c/IVA
+//  - MIS: Precio Instituto c/IVA
 // ============================================================
 
 const TARIFARIO_PRECIOS = {
 
     // ─────────────────────────────────────────────────────────
-    //  NEODENT
+    //  NEODENT  (Precios Instituto c/IVA)
     // ─────────────────────────────────────────────────────────
     neodent: [
-        { nombre: "Implante Neodent",              precio: 0 },
+        { nombre: "Implante Neodent",              precio: 70669 },
         // -- Aditamentos --
-        { nombre: "Tornillo de cicatrización",     precio: 0 },
-        { nombre: "Pilar temporal (provisional)",  precio: 0 },
-        { nombre: "Pilar definitivo (stock)",      precio: 0 },
-        { nombre: "Pilar UCLA calcinable",         precio: 0 },
-        { nombre: "Scanbody",                      precio: 0 },
-        { nombre: "Transfer (cubeta abierta)",     precio: 0 },
-        { nombre: "Transfer (cubeta cerrada)",     precio: 0 },
-        { nombre: "Análogo de implante",           precio: 0 },
-        { nombre: "Tapa de cobertura",             precio: 0 },
+        { nombre: "Tornillo de cicatrización",     precio: 19308 },
+        { nombre: "Pilar temporal (provisional)",  precio: 27917 },
+        { nombre: "Pilar definitivo (stock)",      precio: 34747 },
+        { nombre: "Pilar UCLA calcinable",         precio: 11035 },
+        { nombre: "Scanbody",                      precio: 20162 },
+        { nombre: "Transfer (cubeta abierta)",     precio: 20162 },
+        { nombre: "Transfer (cubeta cerrada)",     precio: 20162 },
+        { nombre: "Análogo de implante",           precio: 11705 },
+        { nombre: "Tapa de cobertura",             precio: 8776  },
         // -- Honorarios y laboratorio --
         { nombre: "Corona sobre implante (lab.)",  precio: 0 },
         { nombre: "Honorarios cirugía implante",   precio: 0 },
     ],
 
     // ─────────────────────────────────────────────────────────
-    //  NEOBIOTECH
+    //  NEOBIOTECH  (Precios Universidad)
     // ─────────────────────────────────────────────────────────
     neobiotech: [
-        { nombre: "Implante Neobiotech",           precio: 0 },
+        { nombre: "Implante Neobiotech",           precio: 63000 },
         // -- Aditamentos --
-        { nombre: "Tornillo de cicatrización",     precio: 0 },
-        { nombre: "Pilar temporal (provisional)",  precio: 0 },
-        { nombre: "Pilar definitivo (stock)",      precio: 0 },
-        { nombre: "Pilar UCLA calcinable",         precio: 0 },
-        { nombre: "Scanbody",                      precio: 0 },
-        { nombre: "Transfer (cubeta abierta)",     precio: 0 },
-        { nombre: "Transfer (cubeta cerrada)",     precio: 0 },
-        { nombre: "Análogo de implante",           precio: 0 },
-        { nombre: "Tapa de cobertura",             precio: 0 },
+        { nombre: "Tornillo de cicatrización",     precio: 10000 },
+        { nombre: "Pilar temporal (provisional)",  precio: 19800 },
+        { nombre: "Pilar definitivo (stock)",      precio: 32400 },
+        { nombre: "Pilar UCLA calcinable",         precio: 16200 },
+        { nombre: "Scanbody",                      precio: 22500 },
+        { nombre: "Transfer (cubeta abierta)",     precio: 19800 },
+        { nombre: "Transfer (cubeta cerrada)",     precio: 19800 },
+        { nombre: "Análogo de implante",           precio: 10000 },
+        { nombre: "Tapa de cobertura",             precio: 0     }, // No en lista
         // -- Honorarios y laboratorio --
         { nombre: "Corona sobre implante (lab.)",  precio: 0 },
         { nombre: "Honorarios cirugía implante",   precio: 0 },
     ],
 
     // ─────────────────────────────────────────────────────────
-    //  MIS IMPLANTS
+    //  MIS IMPLANTS  (Precios Instituto c/IVA)
     // ─────────────────────────────────────────────────────────
     mis: [
-        { nombre: "Implante MIS",                  precio: 84000 },
+        { nombre: "Implante MIS",                  precio: 82000 },
         // -- Aditamentos --
-        { nombre: "Tornillo de cicatrización",     precio: 40000 },
-        { nombre: "Pilar temporal (provisional)",  precio: 0 },
-        { nombre: "Pilar definitivo (stock)",      precio: 32000 },
-        { nombre: "Pilar UCLA calcinable",         precio: 40000 },
-        { nombre: "Scanbody",                      precio: 0 },
-        { nombre: "Transfer (cubeta abierta)",     precio: 0 },
-        { nombre: "Transfer (cubeta cerrada)",     precio: 0 },
-        { nombre: "Análogo de implante",           precio: 0 },
-        { nombre: "Tapa de cobertura",             precio: 0 },
+        { nombre: "Tornillo de cicatrización",     precio: 18900 },
+        { nombre: "Pilar temporal (provisional)",  precio: 34100 },
+        { nombre: "Pilar definitivo (stock)",      precio: 31320 },
+        { nombre: "Pilar UCLA calcinable",         precio: 22500 },
+        { nombre: "Scanbody",                      precio: 31320 },
+        { nombre: "Transfer (cubeta abierta)",     precio: 24300 },
+        { nombre: "Transfer (cubeta cerrada)",     precio: 24300 },
+        { nombre: "Análogo de implante",           precio: 13140 },
+        { nombre: "Tapa de cobertura",             precio: 28600 },
         // -- Honorarios y laboratorio --
         { nombre: "Corona sobre implante (lab.)",  precio: 0 },
         { nombre: "Honorarios cirugía implante",   precio: 0 },
