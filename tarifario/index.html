@@ -37,11 +37,19 @@
             </div>
 
             <!-- Botón ir a Presupuesto -->
-            <a href="../presupuesto/index.html"
-               class="flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-white text-sm font-bold px-4 py-2 rounded-xl transition-colors shadow-lg shadow-amber-900/20">
-                <i class="fa-solid fa-file-invoice-dollar"></i>
-                <span class="hidden sm:inline">Ir al Presupuesto</span>
-            </a>
+            <div class="flex items-center gap-2">
+                <button onclick="resetearADatosBase()"
+                    title="Restaurar precios al tarifario base del repositorio"
+                    class="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs font-bold px-3 py-2 rounded-xl transition-colors">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span class="hidden sm:inline">Restaurar base</span>
+                </button>
+                <a href="../presupuesto/index.html"
+                   class="flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-white text-sm font-bold px-4 py-2 rounded-xl transition-colors shadow-lg shadow-amber-900/20">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <span class="hidden sm:inline">Ir al Presupuesto</span>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -222,6 +230,7 @@
     </main>
 
     <script src="../version.js"></script>
+    <script src="./datos.js"></script>
     <script src="./script.js"></script>
 </body>
 </html>

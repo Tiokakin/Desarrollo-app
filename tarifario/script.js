@@ -1,59 +1,6 @@
 // ===== TARIFARIO DE IMPLANTES - script.js =====
-
-// --- Datos por defecto ---
-// El usuario puede editarlos y se guardarán en localStorage.
-const DATOS_DEFECTO = {
-    neodent: [
-        { nombre: "Implante Grand Morse (GM) ⌀3.5mm", precio: 0 },
-        { nombre: "Implante Grand Morse (GM) ⌀4.0mm", precio: 0 },
-        { nombre: "Implante Grand Morse (GM) ⌀4.3mm", precio: 0 },
-        { nombre: "Implante Grand Morse (GM) ⌀5.0mm", precio: 0 },
-        { nombre: "Implante Titamax (hexágono externo)", precio: 0 },
-        { nombre: "Pilar UCLA (calcinable)", precio: 0 },
-        { nombre: "Pilar Recto Stock", precio: 0 },
-        { nombre: "Tornillo de Cicatrización", precio: 0 },
-        { nombre: "Corona sobre implante (laboratorio)", precio: 0 },
-        { nombre: "Honorarios cirugía de implante", precio: 0 },
-    ],
-    neobiotech: [
-        { nombre: "Implante IS (Internal System) ⌀3.5mm", precio: 0 },
-        { nombre: "Implante IS ⌀4.0mm", precio: 0 },
-        { nombre: "Implante IS ⌀4.5mm", precio: 0 },
-        { nombre: "Implante IS ⌀5.0mm", precio: 0 },
-        { nombre: "Implante SS (Slim System) ⌀3.0mm", precio: 0 },
-        { nombre: "Pilar Recto Stock", precio: 0 },
-        { nombre: "Pilar Angulado 15°", precio: 0 },
-        { nombre: "Tornillo de Cicatrización", precio: 0 },
-        { nombre: "Corona sobre implante (laboratorio)", precio: 0 },
-        { nombre: "Honorarios cirugía de implante", precio: 0 },
-    ],
-    mis: [
-        { nombre: "Implante V3 ⌀3.3mm", precio: 0 },
-        { nombre: "Implante V3 ⌀3.75mm", precio: 0 },
-        { nombre: "Implante V3 ⌀4.2mm", precio: 0 },
-        { nombre: "Implante V3 ⌀5.0mm", precio: 0 },
-        { nombre: "Implante C1 (cónico) ⌀4.2mm", precio: 0 },
-        { nombre: "Pilar Stock Ø4.0 H:5.5", precio: 0 },
-        { nombre: "Pilar Angulado 17°", precio: 0 },
-        { nombre: "Tornillo de Cicatrización", precio: 0 },
-        { nombre: "Corona sobre implante (laboratorio)", precio: 0 },
-        { nombre: "Honorarios cirugía de implante", precio: 0 },
-    ],
-    universidad: [
-        { nombre: "Corona Metal-Porcelana", precio: 0 },
-        { nombre: "Corona Zirconia (CAD/CAM)", precio: 0 },
-        { nombre: "Corona Acrílica Provisional", precio: 0 },
-        { nombre: "Prótesis Parcial Removible (PPR) Acrílica", precio: 0 },
-        { nombre: "Prótesis Parcial Removible Esquelética", precio: 0 },
-        { nombre: "Prótesis Total Superior", precio: 0 },
-        { nombre: "Prótesis Total Inferior", precio: 0 },
-        { nombre: "Perno Muñón Colado", precio: 0 },
-        { nombre: "Incrustación (Inlay/Onlay) Cerámica", precio: 0 },
-        { nombre: "Carilla de Porcelana", precio: 0 },
-        { nombre: "Puente de 3 Piezas Porcelana", precio: 0 },
-        { nombre: "Honorarios supervisión (por sesión)", precio: 0 },
-    ]
-};
+// Los precios base se cargan desde datos.js (TARIFARIO_PRECIOS).
+// El usuario puede editarlos en la app; los cambios se guardan en localStorage.
 
 const STORAGE_KEY = 'TarifarioImplantes';
 let tabActual = 'neodent';
@@ -73,16 +20,35 @@ function parsearMoneda(str) {
 }
 
 // ---- Cargar / Guardar datos ----
+// Prioridad: localStorage (ediciones del usuario) > datos.js (precios base del repositorio)
 function cargarDatos() {
     const guardado = localStorage.getItem(STORAGE_KEY);
     if (guardado) {
         try {
-            return JSON.parse(guardado);
-        } catch(e) {
-            return JSON.parse(JSON.stringify(DATOS_DEFECTO));
-        }
+            const local = JSON.parse(guardado);
+            // Verificar que tenga las 4 claves esperadas
+            const claves = ['neodent', 'neobiotech', 'mis', 'universidad'];
+            if (claves.every(k => Array.isArray(local[k]))) return local;
+        } catch(e) { /* fallback a precios base */ }
     }
-    return JSON.parse(JSON.stringify(DATOS_DEFECTO));
+    // Usar precios base de datos.js (disponible como variable global TARIFARIO_PRECIOS)
+    if (typeof TARIFARIO_PRECIOS !== 'undefined') {
+        return JSON.parse(JSON.stringify(TARIFARIO_PRECIOS));
+    }
+    // Fallback mínimo si datos.js no cargó
+    return { neodent: [], neobiotech: [], mis: [], universidad: [] };
+}
+
+function resetearADatosBase() {
+    if (!confirm('¿Restaurar todos los precios a los valores del tarifario base? Se perderán los cambios guardados localmente.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    const datos = typeof TARIFARIO_PRECIOS !== 'undefined'
+        ? JSON.parse(JSON.stringify(TARIFARIO_PRECIOS))
+        : { neodent: [], neobiotech: [], mis: [], universidad: [] };
+    ['neodent', 'neobiotech', 'mis', 'universidad'].forEach(marca => {
+        renderizarTabla(marca, datos[marca]);
+    });
+    mostrarSnackbar('Precios restaurados desde el tarifario base');
 }
 
 function guardarDatos() {
