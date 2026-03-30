@@ -22,7 +22,7 @@ const TARIFARIO_PRECIOS = {
     //  NEODENT  (Precios Instituto c/IVA)
     // ─────────────────────────────────────────────────────────
     neodent: [
-        { nombre: "Implante Neodent",              precio: 70669 },
+        { nombre: "Implante Neodent",              precio: 82000 },
         // -- Aditamentos --
         { nombre: "Tornillo de cicatrización",     precio: 19308 },
         { nombre: "Pilar temporal (provisional)",  precio: 27917 },
