@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifario de Implantes - Dental Suite</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="min-h-screen font-sans text-slate-800 flex flex-col bg-slate-50">
+
+    <!-- Navbar Global -->
+    <nav class="w-full bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 lg:px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="../index.html" class="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div class="hidden sm:block h-6 w-px bg-slate-700 mx-2"></div>
+                <div class="flex items-center gap-3">
+                    <div class="bg-emerald-500/20 p-2 rounded-lg border border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                        <i class="fa-solid fa-tags text-emerald-400 text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-black tracking-tight text-white uppercase flex items-center gap-2">
+                            Tarifario <span class="text-emerald-400">Implantes</span>
+                        </h1>
+                        <p class="text-[9px] text-slate-500 uppercase tracking-widest font-bold">Gestión de Precios por Marca</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón ir a Presupuesto -->
+            <a href="../presupuesto/index.html"
+               class="flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-white text-sm font-bold px-4 py-2 rounded-xl transition-colors shadow-lg shadow-amber-900/20">
+                <i class="fa-solid fa-file-invoice-dollar"></i>
+                <span class="hidden sm:inline">Ir al Presupuesto</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 w-full max-w-6xl flex-grow">
+
+        <!-- Header informativo -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-slate-800">Gestión de Precios</h2>
+            <p class="text-sm text-slate-500 mt-1">Ingresa y guarda los valores de cada marca e insumo. Los cambios se guardan automáticamente.</p>
+        </div>
+
+        <!-- Tabs de marcas / categorías -->
+        <div class="flex flex-wrap gap-2 mb-6" id="tabs-marcas">
+            <button onclick="cambiarTab('neodent')" id="tab-neodent"
+                class="tab-btn active-tab flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all">
+                <span class="w-3 h-3 rounded-full bg-blue-500 inline-block"></span> Neodent
+            </button>
+            <button onclick="cambiarTab('neobiotech')" id="tab-neobiotech"
+                class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all">
+                <span class="w-3 h-3 rounded-full bg-purple-500 inline-block"></span> Neobiotech
+            </button>
+            <button onclick="cambiarTab('mis')" id="tab-mis"
+                class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all">
+                <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span> MIS
+            </button>
+            <button onclick="cambiarTab('universidad')" id="tab-universidad"
+                class="tab-btn flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm transition-all">
+                <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span> Rehabilitación Universidad
+            </button>
+        </div>
+
+        <!-- ============ PANEL NEODENT ============ -->
+        <div id="panel-neodent" class="panel-marca">
+            <div class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-xl shadow-blue-900/5 border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-circle-dot text-blue-500 text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">Neodent</h3>
+                            <p class="text-xs text-slate-400">Precios en pesos chilenos (CLP)</p>
+                        </div>
+                    </div>
+                    <button onclick="agregarFila('neodent')"
+                        class="flex items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 text-sm font-bold px-4 py-2 rounded-xl transition-colors">
+                        <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Agregar Ítem</span>
+                    </button>
+                </div>
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500">
+                                <th class="p-4 font-bold rounded-tl-2xl w-1/2">Sistema / Insumo</th>
+                                <th class="p-4 font-bold w-1/3">Precio (CLP)</th>
+                                <th class="p-4 font-bold rounded-tr-2xl text-center w-12"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-neodent" class="divide-y divide-slate-100">
+                            <!-- generado por JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ PANEL NEOBIOTECH ============ -->
+        <div id="panel-neobiotech" class="panel-marca hidden">
+            <div class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-xl shadow-purple-900/5 border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-purple-600"></div>
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-circle-dot text-purple-500 text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">Neobiotech</h3>
+                            <p class="text-xs text-slate-400">Precios en pesos chilenos (CLP)</p>
+                        </div>
+                    </div>
+                    <button onclick="agregarFila('neobiotech')"
+                        class="flex items-center gap-2 bg-purple-50 hover:bg-purple-100 text-purple-600 text-sm font-bold px-4 py-2 rounded-xl transition-colors">
+                        <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Agregar Ítem</span>
+                    </button>
+                </div>
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500">
+                                <th class="p-4 font-bold rounded-tl-2xl w-1/2">Sistema / Insumo</th>
+                                <th class="p-4 font-bold w-1/3">Precio (CLP)</th>
+                                <th class="p-4 font-bold rounded-tr-2xl text-center w-12"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-neobiotech" class="divide-y divide-slate-100">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ PANEL MIS ============ -->
+        <div id="panel-mis" class="panel-marca hidden">
+            <div class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-xl shadow-rose-900/5 border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rose-400 to-rose-600"></div>
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-rose-50 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-circle-dot text-rose-500 text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">MIS Implants</h3>
+                            <p class="text-xs text-slate-400">Precios en pesos chilenos (CLP)</p>
+                        </div>
+                    </div>
+                    <button onclick="agregarFila('mis')"
+                        class="flex items-center gap-2 bg-rose-50 hover:bg-rose-100 text-rose-600 text-sm font-bold px-4 py-2 rounded-xl transition-colors">
+                        <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Agregar Ítem</span>
+                    </button>
+                </div>
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500">
+                                <th class="p-4 font-bold rounded-tl-2xl w-1/2">Sistema / Insumo</th>
+                                <th class="p-4 font-bold w-1/3">Precio (CLP)</th>
+                                <th class="p-4 font-bold rounded-tr-2xl text-center w-12"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-mis" class="divide-y divide-slate-100">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ PANEL UNIVERSIDAD ============ -->
+        <div id="panel-universidad" class="panel-marca hidden">
+            <div class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-xl shadow-amber-900/5 border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-orange-500"></div>
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-university text-amber-500 text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">Rehabilitación Universidad</h3>
+                            <p class="text-xs text-slate-400">Aranceles por procedimiento (CLP)</p>
+                        </div>
+                    </div>
+                    <button onclick="agregarFila('universidad')"
+                        class="flex items-center gap-2 bg-amber-50 hover:bg-amber-100 text-amber-600 text-sm font-bold px-4 py-2 rounded-xl transition-colors">
+                        <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Agregar Ítem</span>
+                    </button>
+                </div>
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase tracking-wider text-slate-500">
+                                <th class="p-4 font-bold rounded-tl-2xl w-1/2">Procedimiento</th>
+                                <th class="p-4 font-bold w-1/3">Arancel (CLP)</th>
+                                <th class="p-4 font-bold rounded-tr-2xl text-center w-12"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-universidad" class="divide-y divide-slate-100">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Snackbar de guardado -->
+        <div id="snackbar" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-sm font-bold px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 opacity-0 pointer-events-none transition-all duration-400 z-50">
+            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+            <span id="snackbar-msg">Cambios guardados</span>
+        </div>
+    </main>
+
+    <script src="../version.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
